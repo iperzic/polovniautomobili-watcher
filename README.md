@@ -1,6 +1,6 @@
 # polovniautomobili.com Watcher
 
-This is a web crawler that keeps track of new listings on [Polovni Automobili](polovniautomobili.com). It is written in TypeScript.
+This is a web scraper that keeps track of new listings on [Polovni Automobili](polovniautomobili.com). It is written in TypeScript.
 
 ## Getting Started
 
