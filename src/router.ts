@@ -23,7 +23,12 @@ router.addHandler('DETAIL', async ({ request, page, log }) => {
     const swap = await rightPanel.locator('div:nth-child(4) > div > div.uk-width-1-2.uk-text-bold').textContent()
     const id = await rightPanel.locator('div:nth-child(5) > div > div.uk-width-1-2.uk-text-bold').textContent();
 
-    const description = await page.locator('#classifiedReplaceDescription > div').innerText()
+    const descriptionBlock = await page.$('#classifiedReplaceDescription > div')
+    let description = ''
+
+        if(descriptionBlock) {
+            description = await descriptionBlock.innerText()
+        }
 
 
     const results = {
@@ -50,7 +55,7 @@ router.addHandler('DETAIL', async ({ request, page, log }) => {
 router.addDefaultHandler(async ({ request, page, enqueueLinks, log }) => {
     log.debug(`Enqueueing pagination for: ${request.url}`);
 
-    await page.waitForSelector('#search-results  article.classified.ordinaryClassified > div.textContentHolder > div.textContent a');
+    await page.waitForSelector('#search-results  article.classified.ordinaryClassified > div.textContentHolder > div.textContent a[href*="/auto-oglasi/"]');
     await enqueueLinks({
         selector: '#search-results  article.classified.ordinaryClassified > div.textContentHolder > div.textContent a',
         label: 'DETAIL',
