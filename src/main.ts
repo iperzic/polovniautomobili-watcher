@@ -1,10 +1,10 @@
-import { PlaywrightCrawler, log } from 'crawlee';
+import { log, CheerioCrawler } from 'crawlee';
 import { router } from './router.js';
 
 log.setLevel(log.LEVELS.DEBUG);
 
 log.debug('Setting up crawler.');
-const crawler = new PlaywrightCrawler({
+const crawler = new CheerioCrawler({
     requestHandler: router,
     persistCookiesPerSession: false
 });
