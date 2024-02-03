@@ -1,8 +1,8 @@
-import { log, CheerioCrawler, Dataset } from "crawlee";
-import { router } from "./router.js";
+import { CheerioCrawler, Dataset, log } from 'crawlee';
 
-import { configSchema } from "../config.js";
-import type { Config } from "../config.js";
+import { configSchema } from '../config.js';
+import type { Config } from '../config.js';
+import { router } from './router.js';
 
 function buildSearchParamsFromConfig(config: Config) {
   const params = new URLSearchParams();
@@ -15,7 +15,7 @@ function buildSearchParamsFromConfig(config: Config) {
         params.append(`${key}[]`, encodeURIComponent(arrayValue)),
       );
     } else {
-      params.append(key, encodeURIComponent(value ?? ""));
+      params.append(key, encodeURIComponent(value ?? ''));
     }
   }
 
@@ -27,7 +27,7 @@ export default async function crawl(config: Config) {
 
   log.setLevel(log.LEVELS.DEBUG);
 
-  log.debug("Setting up crawler.");
+  log.debug('Setting up crawler.');
   const crawler = new CheerioCrawler({
     requestHandler: router,
     persistCookiesPerSession: false,
@@ -37,5 +37,5 @@ export default async function crawl(config: Config) {
     `https://www.polovniautomobili.com/auto-oglasi/pretraga?${buildSearchParamsFromConfig(config)}`,
   ]);
 
-  await Dataset.exportToJSON(`${Date.now()}`, { toKVS: "output" });
+  await Dataset.exportToJSON(`${Date.now()}`, { toKVS: 'output' });
 }
