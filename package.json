@@ -5,7 +5,7 @@
   "description": "A web crawler that keeps track of new listings on polovniautomobili.com",
   "main": "src/main.ts",
   "scripts": {
-    "start": "tsc && node dist/main.js"
+    "start": "tsc && node dist/src/main.js"
   },
   "keywords": [],
   "author": "Igor Perzic<iperzic@yahoo.com>",
@@ -14,6 +14,7 @@
     "@apify/tsconfig": "^0.1.0",
     "crawlee": "^3.7.2",
     "playwright": "^1.41.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4"
   }
 }

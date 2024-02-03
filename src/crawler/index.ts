@@ -1,7 +1,28 @@
 import { log, CheerioCrawler, Dataset } from 'crawlee';
 import { router } from './router.js';
 
-export default async function crawl() {
+import { configSchema } from '../config.js';
+import type { Config } from '../config.js';
+
+function buildSearchParamsFromConfig(config: Config) {
+    const params = new URLSearchParams();
+
+    for (let key in config) {
+        const value = config[key as keyof Config];
+
+        if (Array.isArray(value)) {
+            (value as Array<any>).forEach((arrayValue: string) => params.append(`${key}[]`, encodeURIComponent(arrayValue)));
+        } else {
+            params.append(key, encodeURIComponent(value ?? ''));
+        }
+    }
+
+    return params.toString();
+}
+
+export default async function crawl(config: Config) {
+    configSchema.parse(config);
+
     log.setLevel(log.LEVELS.DEBUG);
 
     log.debug('Setting up crawler.');
@@ -10,7 +31,7 @@ export default async function crawl() {
         persistCookiesPerSession: false
     });
 
-    await crawler.run(['https://www.polovniautomobili.com/auto-oglasi/pretraga?brand=ford&model%5B%5D=b-max&brand2=&price_from=&price_to=&year_from=&year_to=&flywheel=&atest=&door_num=&submit_1=&without_price=1&date_limit=&showOldNew=all&modeltxt=&engine_volume_from=&engine_volume_to=&power_from=&power_to=&mileage_from=&mileage_to=&emission_class=&seat_num=&wheel_side=&registration=&country=&country_origin=&city=&registration_price=&page=&sort=']);
+    await crawler.run([`https://www.polovniautomobili.com/auto-oglasi/pretraga?${buildSearchParamsFromConfig(config)}`]);
 
     await Dataset.exportToJSON(`${Date.now()}`, { toKVS: 'output' })
 }
