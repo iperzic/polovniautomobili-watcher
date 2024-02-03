@@ -6,7 +6,8 @@
   "main": "src/main.ts",
   "scripts": {
     "start": "tsc && node dist/src/main.js",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky init"
   },
   "keywords": [],
   "author": "Igor Perzic<iperzic@yahoo.com>",
@@ -14,9 +15,14 @@
   "devDependencies": {
     "@apify/tsconfig": "^0.1.0",
     "crawlee": "^3.7.2",
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.1",
     "playwright": "^1.41.1",
     "prettier": "3.2.4",
     "typescript": "^5.3.3",
     "zod": "^3.22.4"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
