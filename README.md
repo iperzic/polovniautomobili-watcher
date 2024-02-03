@@ -20,16 +20,19 @@ git clone https://github.com/iperzic/polovniautomobili-watcher.git
 ```
 
 2. Navigate into the cloned repository
+
 ```bash
 cd polovniautomobili-watcher
 ```
 
 3. Install the dependencies
+
 ```bash
 pnpm install
 ```
 
 4. Run the project
+
 ```bash
 pnpm start
 ```
