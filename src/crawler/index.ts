@@ -31,6 +31,7 @@ export default async function crawl(config: Config) {
   const crawler = new CheerioCrawler({
     requestHandler: router,
     persistCookiesPerSession: false,
+    maxRequestsPerCrawl: 50,
   });
 
   await crawler.run([
