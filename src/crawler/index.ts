@@ -25,9 +25,8 @@ function buildSearchParamsFromConfig(config: Config) {
 export default async function crawl(config: Config) {
   configSchema.parse(config);
 
-  log.setLevel(log.LEVELS.DEBUG);
-
   log.debug('Setting up crawler.');
+
   const crawler = new CheerioCrawler({
     requestHandler: router,
     persistCookiesPerSession: false,
